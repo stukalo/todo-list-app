@@ -7,6 +7,9 @@ import './style.less';
 const TodoList = props => {
     const {
         todos,
+        updateTodo,
+        toggleTodoEditing,
+        toggleTodoCompleted,
     } = props;
 
     return (
@@ -16,7 +19,12 @@ const TodoList = props => {
                     <div key={todo.id}
                         className={'todo-list_item'}
                     >
-                        <TodoItem todo = {todo}/>
+                        <TodoItem
+                            todo = {todo}
+                            updateTodo = {updateTodo}
+                            toggleTodoEditing = {toggleTodoEditing}
+                            toggleTodoCompleted = {toggleTodoCompleted}
+                        />
                     </div>
 
                 ))}
@@ -30,9 +38,13 @@ TodoList.propTypes = {
         PropTypes.shape({
             id: PropTypes.number.isRequired,
             text: PropTypes.string.isRequired,
-            completed: PropTypes.bool.isRequired,
+            isEditing: PropTypes.bool.isRequired,
+            isCompleted: PropTypes.bool.isRequired,
         })
     ).isRequired,
+    updateTodo: PropTypes.func.isRequired,
+    toggleTodoEditing: PropTypes.func.isRequired,
+    toggleTodoCompleted: PropTypes.func.isRequired,
 };
 
 export default TodoList;

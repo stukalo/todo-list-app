@@ -7,15 +7,15 @@ const Header = props => {
     const {
         strings,
         addTodo,
-        todoInputChange,
     } = props;
 
     return (
         <div className={'header'}>
-            <span className={'header_title'}>Todo</span>
+            <div className={'header_title title'}>
+                <span className={'title_text'}>Todo</span>
+            </div>
             <div className={'header_input'}>
                 <TextInput
-                    onInput = {todoInputChange}
                     onSubmit = {addTodo}
                     placeholder={strings.todoInputPlaceholder}
                 />
@@ -27,7 +27,6 @@ const Header = props => {
 Header.propTypes = {
     strings: PropTypes.object.isRequired,
     addTodo: PropTypes.func.isRequired,
-    todoInputChange: PropTypes.func.isRequired,
 };
 
 export default Header;

@@ -3,14 +3,15 @@ import Header from '../header/Header';
 import PropTypes from 'prop-types';
 import './style.less';
 import TodoList from "../todoList/TodoList";
-import Footer from "../footer/Footer";
 
 const Container = props => {
     const {
         todos,
         strings,
         addTodo,
-        todoInputChange,
+        updateTodo,
+        toggleTodoEditing,
+        toggleTodoCompleted,
     } = props;
 
     return (
@@ -19,14 +20,15 @@ const Container = props => {
                 <Header
                     strings = {strings}
                     addTodo = {addTodo}
-                    todoInputChange = {todoInputChange}
                 />
             </div>
             <div className={'main-container_todo-list'}>
-                <TodoList todos={todos}/>
-            </div>
-            <div className={'main-container_footer'}>
-                <Footer/>
+                <TodoList
+                    todos = {todos}
+                    updateTodo = {updateTodo}
+                    toggleTodoEditing = {toggleTodoEditing}
+                    toggleTodoCompleted = {toggleTodoCompleted}
+                />
             </div>
         </div>
     );
@@ -36,11 +38,14 @@ Container.propTypes = {
     todos: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired,
-        completed: PropTypes.bool.isRequired,
+        isEditing: PropTypes.bool.isRequired,
+        isCompleted: PropTypes.bool.isRequired,
     })),
     strings: PropTypes.object.isRequired,
     addTodo: PropTypes.func.isRequired,
-    todoInputChange: PropTypes.func.isRequired,
+    updateTodo: PropTypes.func.isRequired,
+    toggleTodoEditing: PropTypes.func.isRequired,
+    toggleTodoCompleted: PropTypes.func.isRequired,
 };
 
 export default Container;

@@ -3,4 +3,4 @@
 --require @babel/register
 --require @babel/polyfill
 src/**/*.test.js
--r ./mocha-setup.js
+-r ./config/mocha-setup.js

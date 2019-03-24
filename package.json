@@ -6,8 +6,9 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
-    "test": "mocha --opts ./mocha.opts src/**/*.test.js --recursive -R nyan --silent",
-    "test-cov": "nyc -e .jsx mocha --opts ./mocha.opts src/**/*.test.js --recursive -R nyan --silent"
+    "test": "mocha --opts ./config/mocha.opts src/**/*.test.js --recursive -R nyan --silent",
+    "test-cov": "nyc -e .jsx mocha --opts ./config/mocha.opts src/**/*.test.js --recursive -R nyan --silent",
+    "update-snapshots": "mocha --opts ./config/mocha.opts src/**/*.test.js --require mocha-snapshots --update"
   },
   "author": "Stukalo Oleksandr",
   "license": "ISC",
@@ -36,7 +37,9 @@
       "**/__snapshots__/**",
       ".nyc_output/**",
       ".nyc_output-tmp/**",
-      "mocha-setup.js"
+      "config/mocha-setup.js",
+      "config/mocha.opts",
+      "**/mockData/**"
     ],
     "cache": true,
     "all": false,
@@ -45,6 +48,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/polyfill": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",

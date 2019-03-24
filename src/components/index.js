@@ -1,18 +1,18 @@
 import { connect } from 'react-redux';
 import Component from './container/Container';
-import * as selectors from '../selectors'
-import PropTypes from "prop-types";
+import * as selectors from '../selectors';
+import * as actions from '../actions';
 
 const mapStateToProps = state => ({
     todos: selectors.getTodos(state),
     strings: selectors.getStrings(state),
-    todoInput: selectors.getTodoInputValue(state),
-    todoInputText: PropTypes.string,
 });
 
 const mapDispatchToProps = dispatch => ({
-    addTodo: payload => console.log(payload),
-    todoInputChange: payload => console.log(payload),
+    addTodo: payload => dispatch(actions.addTodo(payload)),
+    updateTodo: payload => dispatch(actions.updateTodo(payload)),
+    toggleTodoEditing: payload => dispatch(actions.toggleTodoEditing(payload)),
+    toggleTodoCompleted: payload => dispatch(actions.toggleTodoCompleted(payload)),
 });
 
 export default connect(

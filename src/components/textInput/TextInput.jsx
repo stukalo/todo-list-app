@@ -1,28 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './style.less';
 
 const TextInput = props => {
     const {
-        text,
-        onInput,
         onSubmit,
         placeholder,
     } = props;
 
-    const handlerKeyDown = event => {
+    const handleKeyDown = (event) => {
         if (event.which === 13) {
-            onSubmit();
-        } else {
-            onInput(event.target.value)
+            const { value } = event.target;
+            onSubmit(value);
+            event.target.value = '';
         }
     };
 
     return (
         <div className={'text-input'}>
             <input type={'text'}
-                   value={text}
                    className={'text-input_input'}
-                   onKeyDown={handlerKeyDown}
+                   onKeyDown={handleKeyDown}
                    placeholder={placeholder}
             />
         </div>
@@ -30,10 +28,8 @@ const TextInput = props => {
 };
 
 TextInput.propTypes = {
-    text: PropTypes.string,
-    onInput: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
+    placeholder: PropTypes.string.isRequired,
 };
 
 export default TextInput;

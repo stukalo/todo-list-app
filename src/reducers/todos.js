@@ -1,102 +1,50 @@
-const initialState = [{
-    id: 1,
-    text: '#1 Todo Text',
-    completed: false,
-}, {
-    id: 2,
-    text: '#2 Todo Text',
-    completed: false,
-},{
-    id: 3,
-    text: '#3 Todo Text',
-    completed: false,
-},{
-    id: 4,
-    text: '#4 Todo Text',
-    completed: false,
-}, {
-    id: 5,
-    text: '#2 Todo Text',
-    completed: false,
-},{
-    id: 6,
-    text: '#3 Todo Text',
-    completed: false,
-},{
-    id: 7,
-    text: '#4 Todo Text',
-    completed: false,
-}, {
-    id: 8,
-    text: '#2 Todo Text',
-    completed: false,
-},{
-    id: 9,
-    text: '#3 Todo Text',
-    completed: false,
-},{
-    id: 10,
-    text: '#4 Todo Text',
-    completed: false,
-}, {
-    id: 11,
-    text: '#2 Todo Text',
-    completed: false,
-},{
-    id: 12,
-    text: '#3 Todo Text',
-    completed: false,
-},{
-    id: 13,
-    text: '#4 Todo Text',
-    completed: false,
-}, {
-    id: 14,
-    text: '#2 Todo Text',
-    completed: false,
-},{
-    id: 15,
-    text: '#3 Todo Text',
-    completed: false,
-},{
-    id: 16,
-    text: '#4 Todo Text',
-    completed: false,
-}, {
-    id: 17,
-    text: '#2 Todo Text',
-    completed: false,
-},{
-    id: 18,
-    text: '#3 Todo Text',
-    completed: false,
-},{
-    id: 19,
-    text: '#4 Todo Text',
-    completed: false,
-}];
+import * as constants from '../constants';
+import mockStore from '../mockData/mockStore';
+
+const initialState = mockStore.todos;
 
 const todos = (state = initialState, action) => {
-    switch (action.type) {
-        case 'ADD_TODO':
+    const {
+        type,
+        payload,
+    } = action;
+
+    switch (type) {
+        case constants.ADD_TODO: {
             return [
-                ...state,
                 {
-                    id: action.id,
-                    text: action.text,
-                    completed: false
+                    id: state.length,
+                    text: payload,
+                    isEditing: false,
+                    isCompleted: false,
                 },
+                ...state,
             ];
-        case 'TOGGLE_TODO':
-            return state.map(todo =>
-                todo.id === action.id ? {
-                    ...todo,
-                    completed: !todo.completed
-                } : todo,
-            );
+        }
+        case constants.UPDATE_TODO: {
+            const {id, value} = payload;
+
+            return state.map(todo => todo.id === id ? {
+                ...todo,
+                text: value,
+                isEditing: false,
+            } : todo);
+        }
+        case constants.TOGGLE_TODO_EDITING: {
+            return state.map(todo => todo.id === payload ? {
+                ...todo,
+                isEditing: !todo.isEditing,
+            } : todo);
+        }
+        case constants.TOGGLE_TODO_COMPLETED: {
+            return state.map(todo => todo.id === payload ? {
+                ...todo,
+                isCompleted: !todo.isCompleted,
+            } : todo);
+        }
         default:
             return state;
     }
 };
 
-export default todos
+export default todos;
