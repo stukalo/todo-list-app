@@ -13,7 +13,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            title: 'todo-list-app',
+            title: 'todo-list-container',
             template: './src/index.html'
         })
     ],

@@ -1,12 +1,12 @@
 import React from 'react';
-import App from '../App';
+import Footer from '../Footer';
 
-describe('App snapshot', () => {
+describe('Footer snapshot', () => {
     it('should render correctly', () => {
         const props = {};
 
         const wrapper = shallow(
-            <App {...props}/>,
+            <Footer {...props}/>,
         );
 
         expect(wrapper).matchSnapshot();

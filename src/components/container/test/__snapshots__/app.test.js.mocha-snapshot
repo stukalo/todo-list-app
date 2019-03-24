@@ -1,4 +1,4 @@
-exports["App snapshot/should render correctly(0)"] = {
+exports["Container snapshot/should render correctly(0)"] = {
   "node": {
     "nodeType": "host",
     "type": "div",
